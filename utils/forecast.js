@@ -14,7 +14,7 @@ const foreCast = (longitude, latitude, callback) => {
       callback(undefined, {
         summary: response.body.daily.data[0].summary,
         currently: response.body.currently.temperature,
-        rain: response.body.currently.precipProbability
+        rain_Chances: response.body.currently.precipProbability
       });
     }
   });
