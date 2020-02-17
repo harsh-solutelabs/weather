@@ -1,27 +1,19 @@
-const request = require("request");
+const geoCode = require("./utils/geocode");
+const foreCast = require("./utils/forecast");
 
-//Skydark-weather-api----------------------------------------------------
-// const url =
-//   "https://api.darksky.net/forecast/04106c915f9369521122a2ba4a67450b/37.8267,-233";
+geoCode("Dwarka", (error, data) => {
+  // console.log(("error", error));
+  // console.log("data", data);
+  if (error) {
+    return console.log(error);
+  }
 
-// request({ url: url, json: true }, (error, response) => {
-//   if (error) {
-//     console.log("Enable to Connect Weather app");
-//   } else if (response.body.error) {
-//     console.log("Unable to find location");
-//   } else {
-//     console.log(
-//       response.body.daily.data[0].summary +
-//         "It is currently " +
-//         response.body.currently.temperature +
-//         "degress out.There is " +
-//         response.body.currently.precipProbability +
-//         "% chance of rain."
-//     );
-//   }
-// });
+  foreCast(data.latitude, data.longitude, (error, foreCast) => {
+    if (error) {
+      return console.log(error);
+    }
 
-geoCode("admedabad", (error, data) => {
-  console.log(("error", error));
-  console.log("data", data);
+    console.log("Location", data.location);
+    console.log(foreCast);
+  });
 });
