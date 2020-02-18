@@ -6,19 +6,19 @@ const address = process.argv[2];
 if (!address) {
   console.log("Please Provide Location to find");
 } else {
-  geoCode(address, (error, data) => {
+  geoCode(address, (error, { latitude, longitude, location }) => {
     // console.log(("error", error));
     // console.log("data", data);
     if (error) {
       return console.log(error);
     }
 
-    foreCast(data.latitude, data.longitude, (error, foreCast) => {
+    foreCast(latitude, longitude, (error, foreCast) => {
       if (error) {
         return console.log(error);
       }
 
-      console.log("Location:-", data.location);
+      console.log("Location:-", location);
       console.log(foreCast);
     });
   });

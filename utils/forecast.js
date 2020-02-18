@@ -5,16 +5,16 @@ const foreCast = (longitude, latitude, callback) => {
     longitude +
     "," +
     latitude;
-  request({ url: url, json: true }, (error, response) => {
+  request({ url, json: true }, (error, { body }) => {
     if (error) {
       callback("Enable to Connect Weather App", undefined);
-    } else if (response.body.error) {
+    } else if (body.error) {
       callback("Unable to find Location", undefined);
     } else {
       callback(undefined, {
-        summary: response.body.daily.data[0].summary,
-        currently: response.body.currently.temperature,
-        rain_Chances: response.body.currently.precipProbability
+        summary: body.daily.data[0].summary,
+        currently: body.currently.temperature,
+        rain_Chances: body.currently.precipProbability
       });
     }
   });
